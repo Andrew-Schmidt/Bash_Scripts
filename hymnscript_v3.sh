@@ -1,3 +1,23 @@
+echo "   _____  .__   ____ .__     __           
+  /     \ |__| / ___\|  |___/  |_ ___.__. 
+ /  \ /  \|  |/ /_/  >  |  \   __<   |  | 
+/    Y    \  |\___  /|   Y  \  |  \___  | 
+\____|__  /__/_____/ |___|  /__|  / ____| 
+        \/                \/      \/      
+                                          "
+echo "___________            __                                
+\_   _____/___________/  |________  ____   ______ ______ 
+ |    __)/  _ \_  __ \   __\_  __ \/ __ \ /  ___//  ___/ 
+ |     \(  <_> )  | \/|  |  |  | \|  ___/ \___ \ \___ \  
+ \___  / \____/|__|   |__|  |__|   \___  >____  >____  > 
+     \/                                \/     \/     \/  
+                                                         "
+echo "exit code legend:"
+echo "0: communion"
+echo "1: wednesday service"
+echo "2: friday service"
+echo "3: regular service"
+
 #defining variables
 pwd > dir.txt
 user=$(cut "dir.txt" -d '/' -f 4)
@@ -14,7 +34,6 @@ regular (){
 	cp "$hymnpath"tlh"$hymn3"*.mid /run/media/$user/church/$folder_name
 	cp "$litpath"2collectbendpg14* /run/media/$user/church/$folder_name
 	cp "$hymnpath"tlh"$hymn4"*.mid /run/media/$user/church/$folder_name
-	exit 1
 	}
 midweek (){
 	echo "midweek"
@@ -24,7 +43,6 @@ midweek (){
 	cp "$hymnpath"tlh"$hymn3"*.mid /run/media/$user/church/$folder_name
 	cp "$litpath"pg44-45vespers.mid /run/media/$user/church/$folder_name
 	cp "$hymnpath"tlh"$hymn4"*.mid /run/media/$user/church/$folder_name
-	exit 2
 	}
 communion (){
 	echo "communion"
@@ -37,7 +55,6 @@ communion (){
 	cp "$litpath"Communion\ verses\ no.2Draw\ nigh.mid /run/media/$user/church/$folder_name
 	cp "$litpath"pg.29\ Nunc\ to\ end.mid /run/media/$user/church/$folder_name
 	cp "$hymnpath"tlh"$hymn4"*.mid /run/media/$user/church/$folder_name
-	exit 3
 	}
 other (){
 	echo "other"
@@ -45,7 +62,6 @@ other (){
 	cp"$hymnpath"tlh"$hymn2"*.mid /run/media/$user/church/$folder_name
 	cp"$hymnpath"tlh"$hymn3"*.mid /run/media/$user/church/$folder_name
 	cp"$hymnpath"tlh"$hymn4"*.mid /run/media/$user/church/$folder_name
-	exit 4
 	}
 good_friday (){
 	echo "good friday"
@@ -55,7 +71,6 @@ good_friday (){
 	cp "$hymnpath"tlh"$hymn3"*.mid /run/media/$user/church/$folder_name
 	cp "$litpath"PAGE24toend.MID /run/media/$user/church/$folder_name
 	cp "$hymnpath"tlh"$hymn4"*.mid /run/media/$user/church/$folder_name
-	exit 5
 	}
 
 #creating the folder and asigning the hymns
@@ -92,6 +107,7 @@ if [ "$day" -ge "24" ]
 					then
 						echo $day
 						communion
+						exit 0
 				fi
 		fi
 	elif [ "$day_name" == "Wed" ]
@@ -99,16 +115,19 @@ if [ "$day" -ge "24" ]
 			echo "day is equal to wednesday"
 			echo $day
 			midweek
+			exit 1
 	elif [ "$day_name" == "Fri" ]
 		then
 			echo "day is equal to friday"
 			echo $day
 			good_friday
-	elif [ "$day_name" == "Sun" ] 
+			exit 2
+	elif [ "$day_name" == "Sun" ]
 		then
 			echo "day is sunday"
 			echo $day
 			regular
+			exit 3
 fi
 zen_verif=$(zenity --question --text "is every thing correct? __$date $hymn1 $hymn2 $hymn3 $hymn4")
 if [ "$?" == "1" ]
