@@ -20,7 +20,7 @@ echo "3: regular service"
 
 #defining variables
 pwd > dir.txt
-user=$(cut "dir.txt" -d '/' -f 4)
+user=$(cut "dir.txt" -d '/' -f 3)
 hymnpath=/run/media/$user/church/Script\ resources/hymnal/hymns/Lutheran\ Hymnal/
 litpath=/run/media/$user/church/Script\ resources/hymnal/Liturgies/
 datefolder=/run/media/$user/church
